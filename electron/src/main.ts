@@ -18,7 +18,7 @@ const createWindow = () => {
 
   const loadURL = async () => {
     if (is.dev) {
-      mainWindow.loadURL("http://localhost:3001");
+      mainWindow.loadURL("http://localhost:3000");
     } else {
       try {
         const port = await startNextJSServer();

@@ -1,3 +1,4 @@
+"use client";
 
 import { useInventory } from "@/context/InventoryContext";
 import StatsCard from "@/components/StatsCard";

@@ -1,16 +1,17 @@
+"use client";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
+import { usePathname } from "next/navigation";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const location = useLocation();
+  const pathname = usePathname();
   const { toast } = useToast();
 
   // Page transition effect
@@ -21,7 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
       void mainContent.offsetWidth; // Trigger reflow
       mainContent.classList.add('animate-fade-in');
     }
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
     <SidebarProvider>

@@ -1,3 +1,4 @@
+"use client";
 
 import { Product } from "@/context/InventoryContext";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
