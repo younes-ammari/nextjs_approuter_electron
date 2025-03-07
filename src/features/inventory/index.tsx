@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useInventory, Product, ProductType } from "@/context/InventoryContext";
 import ProductCard from "@/components/ProductCard";
@@ -95,10 +94,10 @@ export default function InventoryPage() {
                 stock: 0
             });
             setIsAddDialogOpen(false);
-            toast.success("Product added successfully");
+            toast.success("تمت إضافة المنتج بنجاح");
         } catch (error) {
             console.error("Error adding product:", error);
-            toast.error("Failed to add product");
+            toast.error("فشل إضافة المنتج");
         }
     };
 
@@ -110,22 +109,22 @@ export default function InventoryPage() {
             updateProduct(productToEdit.id, productToEdit);
             setProductToEdit(null);
             setIsEditDialogOpen(false);
-            toast.success("Product updated successfully");
+            toast.success("تم تحديث المنتج بنجاح");
         } catch (error) {
             console.error("Error updating product:", error);
-            toast.error("Failed to update product");
+            toast.error("فشل تحديث المنتج");
         }
     };
 
     // Handle delete product
     const handleDeleteProduct = (id: string) => {
-        if (window.confirm("Are you sure you want to delete this product?")) {
+        if (window.confirm("هل أنت متأكد أنك تريد حذف هذا المنتج؟")) {
             try {
                 deleteProduct(id);
-                toast.success("Product deleted successfully");
+                toast.success("تم حذف المنتج بنجاح");
             } catch (error) {
                 console.error("Error deleting product:", error);
-                toast.error("Failed to delete product");
+                toast.error("فشل حذف المنتج");
             }
         }
     };
@@ -152,9 +151,9 @@ export default function InventoryPage() {
         <div className="space-y-6 animate-fade-in">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight">Inventory</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">المخزون</h2>
                     <p className="text-muted-foreground mt-1">
-                        Manage your products and inventory.
+                        إدارة المنتجات والمخزون الخاص بك.
                     </p>
                 </div>
 
@@ -162,37 +161,37 @@ export default function InventoryPage() {
                     <DialogTrigger asChild>
                         <Button>
                             <Plus className="h-4 w-4 mr-2" />
-                            Add Product
+                            إضافة منتج
                         </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[500px]">
                         <DialogHeader>
-                            <DialogTitle>Add New Product</DialogTitle>
+                            <DialogTitle>إضافة منتج جديد</DialogTitle>
                             <DialogDescription>
-                                Enter the details of the new product. Click save when you&apos;re done.
+                                أدخل تفاصيل المنتج الجديد. انقر فوق حفظ عند الانتهاء.
                             </DialogDescription>
                         </DialogHeader>
 
                         <div className="grid gap-4 py-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="product-type">Product Type</Label>
+                                    <Label htmlFor="product-type">نوع المنتج</Label>
                                     <Select
                                         value={newProduct.type}
                                         onValueChange={(value: ProductType) => updateNewProductField('type', value)}
                                     >
                                         <SelectTrigger id="product-type">
-                                            <SelectValue placeholder="Select type" />
+                                            <SelectValue placeholder="اختر النوع" />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="phone">Phone</SelectItem>
-                                            <SelectItem value="tablet">Tablet</SelectItem>
-                                            <SelectItem value="accessory">Accessory</SelectItem>
+                                            <SelectItem value="phone">هاتف</SelectItem>
+                                            <SelectItem value="tablet">جهاز لوحي</SelectItem>
+                                            <SelectItem value="accessory">ملحق</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="stock">Stock Quantity</Label>
+                                    <Label htmlFor="stock">كمية المخزون</Label>
                                     <Input
                                         id="stock"
                                         type="number"
@@ -203,7 +202,7 @@ export default function InventoryPage() {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="name">Product Name</Label>
+                                <Label htmlFor="name">اسم المنتج</Label>
                                 <Input
                                     id="name"
                                     value={newProduct.name}
@@ -212,7 +211,7 @@ export default function InventoryPage() {
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="brand">Brand</Label>
+                                    <Label htmlFor="brand">العلامة التجارية</Label>
                                     <Input
                                         id="brand"
                                         value={newProduct.brand}
@@ -220,7 +219,7 @@ export default function InventoryPage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="model">Model</Label>
+                                    <Label htmlFor="model">الموديل</Label>
                                     <Input
                                         id="model"
                                         value={newProduct.model}
@@ -230,7 +229,7 @@ export default function InventoryPage() {
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="storage">Storage</Label>
+                                    <Label htmlFor="storage">التخزين</Label>
                                     <Input
                                         id="storage"
                                         value={newProduct.storage}
@@ -238,7 +237,7 @@ export default function InventoryPage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="color">Color</Label>
+                                    <Label htmlFor="color">اللون</Label>
                                     <Input
                                         id="color"
                                         value={newProduct.color}
@@ -248,7 +247,7 @@ export default function InventoryPage() {
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="purchase-price">Purchase Price</Label>
+                                    <Label htmlFor="purchase-price">سعر الشراء</Label>
                                     <Input
                                         id="purchase-price"
                                         type="number"
@@ -259,7 +258,7 @@ export default function InventoryPage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="selling-price">Selling Price</Label>
+                                    <Label htmlFor="selling-price">سعر البيع</Label>
                                     <Input
                                         id="selling-price"
                                         type="number"
@@ -274,10 +273,10 @@ export default function InventoryPage() {
 
                         <DialogFooter>
                             <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
-                                Cancel
+                                إلغاء
                             </Button>
                             <Button onClick={handleAddProduct}>
-                                Add Product
+                                إضافة منتج
                             </Button>
                         </DialogFooter>
                     </DialogContent>
@@ -286,9 +285,9 @@ export default function InventoryPage() {
                 <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
                     <DialogContent className="sm:max-w-[500px]">
                         <DialogHeader>
-                            <DialogTitle>Edit Product</DialogTitle>
+                            <DialogTitle>تعديل المنتج</DialogTitle>
                             <DialogDescription>
-                                Update the product details and click save when you&apos;re done.
+                                قم بتحديث تفاصيل المنتج وانقر فوق حفظ عند الانتهاء.
                             </DialogDescription>
                         </DialogHeader>
 
@@ -297,23 +296,23 @@ export default function InventoryPage() {
                                 <div className="grid gap-4 py-4">
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-product-type">Product Type</Label>
+                                            <Label htmlFor="edit-product-type">نوع المنتج</Label>
                                             <Select
                                                 value={productToEdit.type}
                                                 onValueChange={(value: ProductType) => updateProductToEditField('type', value)}
                                             >
                                                 <SelectTrigger id="edit-product-type">
-                                                    <SelectValue placeholder="Select type" />
+                                                    <SelectValue placeholder="اختر النوع" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="phone">Phone</SelectItem>
-                                                    <SelectItem value="tablet">Tablet</SelectItem>
-                                                    <SelectItem value="accessory">Accessory</SelectItem>
+                                                    <SelectItem value="phone">هاتف</SelectItem>
+                                                    <SelectItem value="tablet">جهاز لوحي</SelectItem>
+                                                    <SelectItem value="accessory">ملحق</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </div>
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-stock">Stock Quantity</Label>
+                                            <Label htmlFor="edit-stock">كمية المخزون</Label>
                                             <Input
                                                 id="edit-stock"
                                                 type="number"
@@ -324,7 +323,7 @@ export default function InventoryPage() {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="edit-name">Product Name</Label>
+                                        <Label htmlFor="edit-name">اسم المنتج</Label>
                                         <Input
                                             id="edit-name"
                                             value={productToEdit.name}
@@ -333,7 +332,7 @@ export default function InventoryPage() {
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-brand">Brand</Label>
+                                            <Label htmlFor="edit-brand">العلامة التجارية</Label>
                                             <Input
                                                 id="edit-brand"
                                                 value={productToEdit.brand}
@@ -341,7 +340,7 @@ export default function InventoryPage() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-model">Model</Label>
+                                            <Label htmlFor="edit-model">الموديل</Label>
                                             <Input
                                                 id="edit-model"
                                                 value={productToEdit.model}
@@ -351,7 +350,7 @@ export default function InventoryPage() {
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-storage">Storage</Label>
+                                            <Label htmlFor="edit-storage">التخزين</Label>
                                             <Input
                                                 id="edit-storage"
                                                 value={productToEdit.storage}
@@ -359,7 +358,7 @@ export default function InventoryPage() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-color">Color</Label>
+                                            <Label htmlFor="edit-color">اللون</Label>
                                             <Input
                                                 id="edit-color"
                                                 value={productToEdit.color}
@@ -369,7 +368,7 @@ export default function InventoryPage() {
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-purchase-price">Purchase Price</Label>
+                                            <Label htmlFor="edit-purchase-price">سعر الشراء</Label>
                                             <Input
                                                 id="edit-purchase-price"
                                                 type="number"
@@ -380,7 +379,7 @@ export default function InventoryPage() {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <Label htmlFor="edit-selling-price">Selling Price</Label>
+                                            <Label htmlFor="edit-selling-price">سعر البيع</Label>
                                             <Input
                                                 id="edit-selling-price"
                                                 type="number"
@@ -398,10 +397,10 @@ export default function InventoryPage() {
 
                                 <DialogFooter>
                                     <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
-                                        Cancel
+                                        إلغاء
                                     </Button>
                                     <Button onClick={handleEditProduct}>
-                                        Save Changes
+                                        حفظ التغييرات
                                     </Button>
                                 </DialogFooter>
                             </>
@@ -415,7 +414,7 @@ export default function InventoryPage() {
                     <div className="relative flex-1">
                         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                         <Input
-                            placeholder="Search products..."
+                            placeholder="ابحث عن المنتجات..."
                             className="pl-9"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -425,13 +424,13 @@ export default function InventoryPage() {
                     <Select value={sortBy} onValueChange={(value: any) => setSortBy(value)}>
                         <SelectTrigger className="w-[180px]">
                             <SortAsc className="h-4 w-4 mr-2" />
-                            <SelectValue placeholder="Sort by" />
+                            <SelectValue placeholder="الترتيب حسب" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="name">Name</SelectItem>
-                            <SelectItem value="price">Price</SelectItem>
-                            <SelectItem value="stock">Stock</SelectItem>
-                            <SelectItem value="updated">Last Updated</SelectItem>
+                            <SelectItem value="name">الاسم</SelectItem>
+                            <SelectItem value="price">السعر</SelectItem>
+                            <SelectItem value="stock">المخزون</SelectItem>
+                            <SelectItem value="updated">آخر تحديث</SelectItem>
                         </SelectContent>
                     </Select>
 
@@ -448,31 +447,31 @@ export default function InventoryPage() {
                     <Select value={productType} onValueChange={(value: any) => setProductType(value)}>
                         <SelectTrigger>
                             <Filter className="h-4 w-4 mr-2" />
-                            <SelectValue placeholder="Type" />
+                            <SelectValue placeholder="النوع" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">
                                 <div className="flex items-center">
                                     <Package className="h-4 w-4 mr-2" />
-                                    All Types
+                                    جميع الأنواع
                                 </div>
                             </SelectItem>
                             <SelectItem value="phone">
                                 <div className="flex items-center">
                                     <Smartphone className="h-4 w-4 mr-2" />
-                                    Phones
+                                    هواتف
                                 </div>
                             </SelectItem>
                             <SelectItem value="tablet">
                                 <div className="flex items-center">
                                     <Tablet className="h-4 w-4 mr-2" />
-                                    Tablets
+                                    أجهزة لوحية
                                 </div>
                             </SelectItem>
                             <SelectItem value="accessory">
                                 <div className="flex items-center">
                                     <Headphones className="h-4 w-4 mr-2" />
-                                    Accessories
+                                    إكسسوارات
                                 </div>
                             </SelectItem>
                         </SelectContent>
@@ -480,13 +479,13 @@ export default function InventoryPage() {
 
                     <Select value={stockStatus} onValueChange={(value: any) => setStockStatus(value)}>
                         <SelectTrigger>
-                            <SelectValue placeholder="Stock" />
+                            <SelectValue placeholder="المخزون" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All Stock</SelectItem>
-                            <SelectItem value="in-stock">In Stock</SelectItem>
-                            <SelectItem value="low-stock">Low Stock</SelectItem>
-                            <SelectItem value="out-of-stock">Out of Stock</SelectItem>
+                            <SelectItem value="all">كل المخزون</SelectItem>
+                            <SelectItem value="in-stock">في المخزون</SelectItem>
+                            <SelectItem value="low-stock">مخزون منخفض</SelectItem>
+                            <SelectItem value="out-of-stock">نفاد المخزون</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
@@ -495,9 +494,9 @@ export default function InventoryPage() {
             {filteredProducts.length === 0 ? (
                 <div className="flex flex-col items-center justify-center min-h-[400px] bg-muted/30 rounded-lg">
                     <Package className="h-12 w-12 text-muted-foreground opacity-20" />
-                    <h3 className="mt-4 font-medium text-muted-foreground">No products found</h3>
+                    <h3 className="mt-4 font-medium text-muted-foreground">لم يتم العثور على منتجات</h3>
                     <p className="text-sm text-muted-foreground">
-                        Try changing your search or filter criteria.
+                        حاول تغيير معايير البحث أو التصفية.
                     </p>
                 </div>
             ) : (

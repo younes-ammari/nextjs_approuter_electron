@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useInventory } from "@/context/InventoryContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -40,7 +39,7 @@ export default function SalesPage() {
         if (!selectedSaleId) return;
 
         deleteSale(selectedSaleId);
-        toast.success("Sale deleted successfully");
+        toast.success("تم حذف البيع بنجاح");
         setIsDeleteDialogOpen(false);
     };
 
@@ -48,14 +47,14 @@ export default function SalesPage() {
         <div className="space-y-6 animate-fade-in">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight">Sales</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">المبيعات</h2>
                     <p className="text-muted-foreground mt-1">
-                        Create new sales and view recent transactions.
+                        أنشئ مبيعات جديدة وعرض المعاملات الأخيرة.
                     </p>
                 </div>
                 <Button asChild>
                     <Link href="/sales-history">
-                        View All Sales
+                        عرض جميع المبيعات
                         <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                 </Button>
@@ -69,15 +68,15 @@ export default function SalesPage() {
                 <div className="lg:col-span-3">
                     <Card className="shadow-md">
                         <CardHeader className="px-6">
-                            <CardTitle className="text-xl">Recent Sales</CardTitle>
+                            <CardTitle className="text-xl">المبيعات الأخيرة</CardTitle>
                         </CardHeader>
                         <CardContent className="px-6">
                             {recentSales.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center py-6 text-center">
                                     <Receipt className="h-12 w-12 text-muted-foreground opacity-20" />
-                                    <h3 className="mt-4 font-medium text-muted-foreground">No sales found</h3>
+                                    <h3 className="mt-4 font-medium text-muted-foreground">لم يتم العثور على مبيعات</h3>
                                     <p className="text-sm text-muted-foreground">
-                                        Create a new sale to see it here.
+                                        أنشئ عملية بيع جديدة لرؤيتها هنا.
                                     </p>
                                 </div>
                             ) : (
@@ -93,7 +92,7 @@ export default function SalesPage() {
                                                     onClick={() => handleViewInvoice(sale.id)}
                                                 >
                                                     <Receipt className="h-4 w-4 mr-2 text-muted-foreground" />
-                                                    <span className="font-medium">Invoice #{sale.id}</span>
+                                                    <span className="font-medium">فاتورة #{sale.id}</span>
                                                 </div>
                                                 <div className="flex items-center space-x-2">
                                                     <div className="text-sm text-muted-foreground">
@@ -126,7 +125,7 @@ export default function SalesPage() {
                                                         return (
                                                             <div key={index} className="flex justify-between text-sm">
                                                                 <div>
-                                                                    {product ? product.name : 'Unknown Product'} x{item.quantity}
+                                                                    {product ? product.name : 'منتج غير معروف'} x{item.quantity}
                                                                 </div>
                                                                 <div className="text-right">
                                                                     {formatCurrency(item.price * item.quantity)}
@@ -136,7 +135,7 @@ export default function SalesPage() {
                                                     })}
                                                 </div>
                                                 <div className="flex justify-between mt-2 pt-2 border-t font-medium">
-                                                    <div>Total</div>
+                                                    <div>الإجمالي</div>
                                                     <div>{formatCurrency(sale.finalTotal)}</div>
                                                 </div>
                                             </div>
@@ -153,18 +152,18 @@ export default function SalesPage() {
             <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure you want to delete this sale?</AlertDialogTitle>
+                        <AlertDialogTitle>هل أنت متأكد أنك تريد حذف هذا البيع؟</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. The items in this sale will be returned to inventory.
+                            لا يمكن التراجع عن هذا الإجراء. سيتم إرجاع العناصر الموجودة في هذا البيع إلى المخزون.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>إلغاء</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={handleDeleteSale}
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                         >
-                            Delete
+                            حذف
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

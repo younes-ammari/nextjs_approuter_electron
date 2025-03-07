@@ -32,35 +32,35 @@ export default function HomePage() {
     return (
         <div className="space-y-8 animate-fade-in">
             <div>
-                <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+                <h2 className="text-3xl font-bold tracking-tight">لوحة التحكم</h2>
                 <p className="text-muted-foreground mt-1">
-                    Welcome to your MobileStock management system.
+                    مرحبًا بك في نظام إدارة MobileStock الخاص بك.
                 </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <StatsCard
-                    title="Total Revenue (30d)"
+                    title="إجمالي الإيرادات (30 يومًا)"
                     value={formatCurrency(getTotalSales(30))}
                     icon={<DollarSign className="h-4 w-4 text-primary" />}
                     trend={{ value: 12.5, isPositive: true }}
                 />
 
                 <StatsCard
-                    title="Recent Sales"
+                    title="المبيعات الأخيرة"
                     value={recentSalesCount}
-                    description="Last 7 days"
+                    description="آخر 7 أيام"
                     icon={<ShoppingBag className="h-4 w-4 text-primary" />}
                 />
 
                 <StatsCard
-                    title="Inventory Items"
+                    title="عدد عناصر المخزون"
                     value={totalProducts}
                     icon={<Package className="h-4 w-4 text-primary" />}
                 />
 
                 <StatsCard
-                    title="Inventory Value"
+                    title="قيمة المخزون"
                     value={formatCurrency(inventoryValue)}
                     icon={<BarChart3 className="h-4 w-4 text-primary" />}
                 />
@@ -69,8 +69,8 @@ export default function HomePage() {
             <div className="grid gap-4 md:grid-cols-7">
                 <Card className="md:col-span-4 shadow-md">
                     <CardHeader>
-                        <CardTitle>Sales Overview</CardTitle>
-                        <CardDescription>Daily sales for the past week</CardDescription>
+                        <CardTitle>نظرة عامة على المبيعات</CardTitle>
+                        <CardDescription>المبيعات اليومية للأسبوع الماضي</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <div className="h-80">
@@ -107,8 +107,8 @@ export default function HomePage() {
 
                 <Card className="md:col-span-3 shadow-md">
                     <CardHeader>
-                        <CardTitle>Inventory Alert</CardTitle>
-                        <CardDescription>Items that need attention</CardDescription>
+                        <CardTitle>تنبيه المخزون</CardTitle>
+                        <CardDescription>العناصر التي تحتاج إلى اهتمام</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
@@ -118,8 +118,8 @@ export default function HomePage() {
                                         <Activity className="h-4 w-4 text-destructive" />
                                     </div>
                                     <div>
-                                        <p className="font-medium">Out of Stock</p>
-                                        <p className="text-sm text-muted-foreground">Items need restocking</p>
+                                        <p className="font-medium">نفاد المخزون</p>
+                                        <p className="text-sm text-muted-foreground">العناصر تحتاج إلى إعادة تخزين</p>
                                     </div>
                                 </div>
                                 <span className="font-bold text-xl">{outOfStockProducts}</span>
@@ -131,8 +131,8 @@ export default function HomePage() {
                                         <Activity className="h-4 w-4 text-yellow-500" />
                                     </div>
                                     <div>
-                                        <p className="font-medium">Low Stock</p>
-                                        <p className="text-sm text-muted-foreground">Items running low</p>
+                                        <p className="font-medium">مخزون منخفض</p>
+                                        <p className="text-sm text-muted-foreground">العناصر تنفد قريبًا</p>
                                     </div>
                                 </div>
                                 <span className="font-bold text-xl">{lowStockProducts}</span>
@@ -143,7 +143,7 @@ export default function HomePage() {
                                     href="/inventory"
                                     className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full"
                                 >
-                                    View Inventory
+                                    عرض المخزون
                                 </Link>
                             </div>
                         </div>

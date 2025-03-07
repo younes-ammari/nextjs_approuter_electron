@@ -1,8 +1,14 @@
+/* In your global CSS file (e.g., styles.css or app.css) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+}
 @layer base {
   :root {
     --background: 210 40% 98%;

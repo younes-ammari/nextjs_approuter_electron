@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useInventory } from "@/context/InventoryContext";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -25,17 +24,17 @@ export default function ReportsPage() {
 
     // Stock distribution data for pie chart
     const stockData = [
-        { name: "In Stock", value: inStock, color: "#22c55e" },
-        { name: "Low Stock", value: lowStock, color: "#f97316" },
-        { name: "Out of Stock", value: outOfStock, color: "#ef4444" },
+        { name: "في المخزون", value: inStock, color: "#22c55e" },
+        { name: "مخزون منخفض", value: lowStock, color: "#f97316" },
+        { name: "نفاد المخزون", value: outOfStock, color: "#ef4444" },
     ];
 
     return (
         <div className="space-y-6 animate-fade-in">
             <div>
-                <h2 className="text-3xl font-bold tracking-tight">Reports</h2>
+                <h2 className="text-3xl font-bold tracking-tight">التقارير</h2>
                 <p className="text-muted-foreground mt-1">
-                    View sales, inventory, and profit reports.
+                    عرض تقارير المبيعات والمخزون والأرباح.
                 </p>
             </div>
 
@@ -43,15 +42,15 @@ export default function ReportsPage() {
                 <TabsList className="grid w-full grid-cols-3 mb-6">
                     <TabsTrigger value="sales" className="flex items-center gap-2">
                         <BarChart2 className="h-4 w-4" />
-                        <span>Sales Report</span>
+                        <span>تقرير المبيعات</span>
                     </TabsTrigger>
                     <TabsTrigger value="inventory" className="flex items-center gap-2">
                         <Package className="h-4 w-4" />
-                        <span>Inventory Report</span>
+                        <span>تقرير المخزون</span>
                     </TabsTrigger>
                     <TabsTrigger value="profit" className="flex items-center gap-2">
                         <CircleDollarSign className="h-4 w-4" />
-                        <span>Profit Report</span>
+                        <span>تقرير الأرباح</span>
                     </TabsTrigger>
                 </TabsList>
 
@@ -61,7 +60,7 @@ export default function ReportsPage() {
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    Total Sales
+                                    إجمالي المبيعات
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {sales.length}
@@ -71,7 +70,7 @@ export default function ReportsPage() {
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    Total Revenue
+                                    إجمالي الإيرادات
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {formatCurrency(totalRevenue)}
@@ -81,7 +80,7 @@ export default function ReportsPage() {
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    Average Sale Value
+                                    متوسط قيمة البيع
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {sales.length ? formatCurrency(totalRevenue / sales.length) : formatCurrency(0)}
@@ -92,7 +91,7 @@ export default function ReportsPage() {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Sales Trend (Last 7 Days)</CardTitle>
+                            <CardTitle>اتجاه المبيعات (آخر 7 أيام)</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="h-80">
@@ -103,7 +102,7 @@ export default function ReportsPage() {
                                         <YAxis
                                             tickFormatter={(value) => `$${value}`}
                                         />
-                                        <Tooltip formatter={(value) => [`$${value}`, "Revenue"]} />
+                                        <Tooltip formatter={(value) => [`$${value}`, "الإيرادات"]} />
                                         <Bar dataKey="total" fill="#3b82f6" />
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -118,7 +117,7 @@ export default function ReportsPage() {
                         <Card className={inStock > 0 ? "border-green-500 border-l-4" : ""}>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    In Stock Products
+                                    المنتجات الموجودة في المخزون
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {inStock}
@@ -128,7 +127,7 @@ export default function ReportsPage() {
                         <Card className={lowStock > 0 ? "border-orange-500 border-l-4" : ""}>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    Low Stock Products
+                                    المنتجات ذات المخزون المنخفض
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {lowStock}
@@ -138,7 +137,7 @@ export default function ReportsPage() {
                         <Card className={outOfStock > 0 ? "border-red-500 border-l-4" : ""}>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    Out of Stock Products
+                                    المنتجات التي نفد مخزونها
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {outOfStock}
@@ -149,7 +148,7 @@ export default function ReportsPage() {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Inventory Distribution</CardTitle>
+                            <CardTitle>توزيع المخزون</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="h-80 flex items-center justify-center">
@@ -168,7 +167,7 @@ export default function ReportsPage() {
                                                 <Cell key={`cell-${index}`} fill={entry.color} />
                                             ))}
                                         </Pie>
-                                        <Tooltip formatter={(value) => [value, "Items"]} />
+                                        <Tooltip formatter={(value) => [value, "العناصر"]} />
                                     </PieChart>
                                 </ResponsiveContainer>
                             </div>
@@ -182,7 +181,7 @@ export default function ReportsPage() {
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    Total Revenue
+                                    إجمالي الإيرادات
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {formatCurrency(totalRevenue)}
@@ -192,7 +191,7 @@ export default function ReportsPage() {
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                                    Total Profit
+                                    إجمالي الأرباح
                                 </CardTitle>
                                 <CardDescription className="text-2xl font-bold">
                                     {formatCurrency(totalProfit)}
@@ -203,14 +202,14 @@ export default function ReportsPage() {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Profit Margin</CardTitle>
+                            <CardTitle>هامش الربح</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="flex flex-col items-center justify-center h-60">
                                 <div className="text-5xl font-bold">
                                     {totalRevenue > 0 ? Math.round((totalProfit / totalRevenue) * 100) : 0}%
                                 </div>
-                                <p className="text-muted-foreground mt-2">Overall Profit Margin</p>
+                                <p className="text-muted-foreground mt-2">هامش الربح الإجمالي</p>
                             </div>
                         </CardContent>
                     </Card>

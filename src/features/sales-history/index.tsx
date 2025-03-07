@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { Sale, useInventory } from "@/context/InventoryContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -75,34 +74,34 @@ export default function SalesHistoryPage() {
     return (
         <div className="space-y-6 animate-fade-in">
             <div>
-                <h2 className="text-3xl font-bold tracking-tight">Sales History</h2>
+                <h2 className="text-3xl font-bold tracking-tight">سجل المبيعات</h2>
                 <p className="text-muted-foreground mt-1">
-                    View and manage past sales records.
+                    عرض وإدارة سجلات المبيعات السابقة.
                 </p>
             </div>
 
             <Card className="shadow-md">
                 <CardHeader className="pb-3">
-                    <CardTitle className="text-xl">Filter Sales</CardTitle>
+                    <CardTitle className="text-xl">تصفية المبيعات</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                         <div className="space-y-2">
-                            <Label htmlFor="time-filter">Time Period</Label>
+                            <Label htmlFor="time-filter">المدى الزمني</Label>
                             <Select
                                 value={timeFilter}
                                 onValueChange={setTimeFilter}
                             >
                                 <SelectTrigger id="time-filter">
-                                    <SelectValue placeholder="Select time period" />
+                                    <SelectValue placeholder="اختر مدى زمني" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="all">All Time</SelectItem>
-                                    <SelectItem value="today">Today</SelectItem>
-                                    <SelectItem value="yesterday">Yesterday</SelectItem>
-                                    <SelectItem value="thisWeek">This Week</SelectItem>
-                                    <SelectItem value="thisMonth">This Month</SelectItem>
-                                    <SelectItem value="customRange">Custom Range</SelectItem>
+                                    <SelectItem value="all">كل الأوقات</SelectItem>
+                                    <SelectItem value="today">اليوم</SelectItem>
+                                    <SelectItem value="yesterday">الأمس</SelectItem>
+                                    <SelectItem value="thisWeek">هذا الأسبوع</SelectItem>
+                                    <SelectItem value="thisMonth">هذا الشهر</SelectItem>
+                                    <SelectItem value="customRange">نطاق زمني مخصص</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
@@ -110,7 +109,7 @@ export default function SalesHistoryPage() {
                         {timeFilter === 'customRange' && (
                             <>
                                 <div className="space-y-2">
-                                    <Label htmlFor="start-date">Start Date</Label>
+                                    <Label htmlFor="start-date">تاريخ البدء</Label>
                                     <div className="flex items-center space-x-2">
                                         <Calendar className="h-4 w-4 text-muted-foreground" />
                                         <Input
@@ -122,7 +121,7 @@ export default function SalesHistoryPage() {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="end-date">End Date</Label>
+                                    <Label htmlFor="end-date">تاريخ الانتهاء</Label>
                                     <div className="flex items-center space-x-2">
                                         <Calendar className="h-4 w-4 text-muted-foreground" />
                                         <Input
@@ -137,11 +136,11 @@ export default function SalesHistoryPage() {
                         )}
 
                         <div className="space-y-2">
-                            <Label htmlFor="search-invoice">Search by Invoice #</Label>
+                            <Label htmlFor="search-invoice">البحث برقم الفاتورة</Label>
                             <div className="flex space-x-2">
                                 <Input
                                     id="search-invoice"
-                                    placeholder="Enter invoice number"
+                                    placeholder="أدخل رقم الفاتورة"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
@@ -151,6 +150,7 @@ export default function SalesHistoryPage() {
                                     onClick={() => setSearchQuery("")}
                                 >
                                     <Search className="h-4 w-4" />
+                                    بحث
                                 </Button>
                             </div>
                         </div>
@@ -160,15 +160,15 @@ export default function SalesHistoryPage() {
 
             <Card className="shadow-md">
                 <CardHeader className="pb-3">
-                    <CardTitle className="text-xl">Sales Records</CardTitle>
+                    <CardTitle className="text-xl">سجلات المبيعات</CardTitle>
                 </CardHeader>
                 <CardContent>
                     {filteredSales.length === 0 ? (
                         <div className="flex flex-col items-center justify-center py-8 text-center">
                             <Receipt className="h-16 w-16 text-muted-foreground opacity-20" />
-                            <h3 className="mt-4 text-lg font-medium text-muted-foreground">No sales found</h3>
+                            <h3 className="mt-4 text-lg font-medium text-muted-foreground">لم يتم العثور على مبيعات</h3>
                             <p className="text-muted-foreground">
-                                Try adjusting your filters to see more results.
+                                حاول تعديل عوامل التصفية لرؤية المزيد من النتائج.
                             </p>
                         </div>
                     ) : (
@@ -184,7 +184,7 @@ export default function SalesHistoryPage() {
                                             <div className="flex items-center space-x-2">
                                                 <Receipt className="h-4 w-4 text-muted-foreground" />
                                                 <div>
-                                                    <span className="font-medium">Invoice #{sale.id}</span>
+                                                    <span className="font-medium">فاتورة #{sale.id}</span>
                                                     <div className="text-xs text-muted-foreground mt-1">
                                                         {formatDate(sale.createdAt)}
                                                     </div>
@@ -198,7 +198,7 @@ export default function SalesHistoryPage() {
                                                     onClick={() => setSelectedSaleId(sale.id)}
                                                 >
                                                     <Eye className="h-4 w-4 mr-1" />
-                                                    <span>View</span>
+                                                    عرض
                                                 </Button>
                                                 <Button
                                                     variant="outline"
@@ -206,14 +206,14 @@ export default function SalesHistoryPage() {
                                                     onClick={() => handlePrintInvoice(sale)}
                                                 >
                                                     <Printer className="h-4 w-4 mr-1" />
-                                                    <span>Print</span>
+                                                    طباعة
                                                 </Button>
                                             </div>
                                         </div>
 
                                         <div className="px-4 py-3 grid md:grid-cols-3 gap-4">
                                             <div>
-                                                <h4 className="text-sm font-medium text-muted-foreground mb-1">Customer</h4>
+                                                <h4 className="text-sm font-medium text-muted-foreground mb-1">العميل</h4>
                                                 <div className="flex items-start space-x-2">
                                                     <User className="h-4 w-4 mt-0.5 text-muted-foreground" />
                                                     <div>
@@ -223,21 +223,21 @@ export default function SalesHistoryPage() {
                                                                 <p className="text-sm text-muted-foreground">{customer.phone}</p>
                                                             </>
                                                         ) : (
-                                                            <p className="text-muted-foreground">Walk-in Customer</p>
+                                                            <p className="text-muted-foreground">عميل بدون حساب</p>
                                                         )}
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div>
-                                                <h4 className="text-sm font-medium text-muted-foreground mb-1">Items</h4>
+                                                <h4 className="text-sm font-medium text-muted-foreground mb-1">العناصر</h4>
                                                 <div className="text-sm">
                                                     {sale.items.slice(0, 2).map((item, i) => {
                                                         const product = products.find(p => p.id === item.productId);
                                                         return (
                                                             <div key={i} className="flex justify-between">
                                                                 <span>
-                                                                    {product ? product.name : 'Unknown Product'} x{item.quantity}
+                                                                    {product ? product.name : 'منتج غير معروف'} x{item.quantity}
                                                                 </span>
                                                                 <span>{formatCurrency(item.price * item.quantity)}</span>
                                                             </div>
@@ -245,31 +245,31 @@ export default function SalesHistoryPage() {
                                                     })}
                                                     {sale.items.length > 2 && (
                                                         <div className="text-muted-foreground">
-                                                            +{sale.items.length - 2} more items
+                                                            +{sale.items.length - 2} عناصر إضافية
                                                         </div>
                                                     )}
                                                 </div>
                                             </div>
 
                                             <div className="flex flex-col">
-                                                <h4 className="text-sm font-medium text-muted-foreground mb-1">Payment</h4>
+                                                <h4 className="text-sm font-medium text-muted-foreground mb-1">الدفع</h4>
                                                 <div className="space-y-1 text-sm">
                                                     <div className="flex justify-between">
-                                                        <span>Subtotal:</span>
+                                                        <span>المجموع الفرعي:</span>
                                                         <span>{formatCurrency(sale.total)}</span>
                                                     </div>
                                                     {sale.discount > 0 && (
                                                         <div className="flex justify-between">
-                                                            <span>Discount:</span>
+                                                            <span>الخصم:</span>
                                                             <span>-{formatCurrency(sale.discount)}</span>
                                                         </div>
                                                     )}
                                                     <div className="flex justify-between font-medium">
-                                                        <span>Total:</span>
+                                                        <span>الإجمالي:</span>
                                                         <span>{formatCurrency(sale.finalTotal)}</span>
                                                     </div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Paid via: {sale.paymentMethod.replace('_', ' ')}
+                                                        تم الدفع عن طريق: {sale.paymentMethod.replace('_', ' ')}
                                                     </div>
                                                 </div>
                                             </div>
@@ -290,14 +290,14 @@ export default function SalesHistoryPage() {
             <Dialog open={!!selectedSaleId} onOpenChange={(open) => !open && setSelectedSaleId(null)}>
                 <DialogContent className="max-w-3xl">
                     <DialogHeader>
-                        <DialogTitle>Invoice #{selectedSale?.id}</DialogTitle>
+                        <DialogTitle>فاتورة #{selectedSale?.id}</DialogTitle>
                     </DialogHeader>
 
                     {selectedSale && (
                         <div className="space-y-4">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <p className="text-sm text-muted-foreground">Date:</p>
+                                    <p className="text-sm text-muted-foreground">التاريخ:</p>
                                     <p>{formatDate(selectedSale.createdAt)}</p>
                                 </div>
                                 <div className="flex-shrink-0">
@@ -307,7 +307,7 @@ export default function SalesHistoryPage() {
 
                             <div className="grid md:grid-cols-2 gap-4">
                                 <div>
-                                    <h3 className="font-medium mb-1">Customer Details</h3>
+                                    <h3 className="font-medium mb-1">تفاصيل العميل</h3>
                                     {selectedSale.customerId ? (
                                         (() => {
                                             const customer = customers.find(c => c.id === selectedSale.customerId);
@@ -318,31 +318,31 @@ export default function SalesHistoryPage() {
                                                     <p className="text-sm text-muted-foreground">{customer.address}</p>
                                                 </div>
                                             ) : (
-                                                <p className="text-sm text-muted-foreground">Customer data not found</p>
+                                                <p className="text-sm text-muted-foreground">بيانات العميل غير موجودة</p>
                                             );
                                         })()
                                     ) : (
-                                        <p className="text-sm text-muted-foreground">Walk-in Customer</p>
+                                        <p className="text-sm text-muted-foreground">عميل بدون حساب</p>
                                     )}
                                 </div>
 
                                 <div>
-                                    <h3 className="font-medium mb-1">Payment Information</h3>
+                                    <h3 className="font-medium mb-1">معلومات الدفع</h3>
                                     <div className="space-y-1">
                                         <div className="flex justify-between">
-                                            <span className="text-sm text-muted-foreground">Payment Method:</span>
+                                            <span className="text-sm text-muted-foreground">طريقة الدفع:</span>
                                             <span className="capitalize">{selectedSale.paymentMethod.replace('_', ' ')}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-sm text-muted-foreground">Subtotal:</span>
+                                            <span className="text-sm text-muted-foreground">المجموع الفرعي:</span>
                                             <span>{formatCurrency(selectedSale.total)}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-sm text-muted-foreground">Discount:</span>
+                                            <span className="text-sm text-muted-foreground">الخصم:</span>
                                             <span>{formatCurrency(selectedSale.discount)}</span>
                                         </div>
                                         <div className="flex justify-between font-medium">
-                                            <span>Total:</span>
+                                            <span>الإجمالي:</span>
                                             <span>{formatCurrency(selectedSale.finalTotal)}</span>
                                         </div>
                                     </div>
@@ -350,13 +350,13 @@ export default function SalesHistoryPage() {
                             </div>
 
                             <div>
-                                <h3 className="font-medium mb-2">Items</h3>
+                                <h3 className="font-medium mb-2">العناصر</h3>
                                 <div className="border rounded-md overflow-hidden">
                                     <div className="grid grid-cols-12 bg-muted/30 text-sm font-medium py-2 px-4">
-                                        <div className="col-span-6">Product</div>
-                                        <div className="col-span-2 text-right">Price</div>
-                                        <div className="col-span-2 text-right">Qty</div>
-                                        <div className="col-span-2 text-right">Subtotal</div>
+                                        <div className="col-span-6">المنتج</div>
+                                        <div className="col-span-2 text-right">السعر</div>
+                                        <div className="col-span-2 text-right">الكمية</div>
+                                        <div className="col-span-2 text-right">المجموع الفرعي</div>
                                     </div>
 
                                     <div className="divide-y">
@@ -371,7 +371,7 @@ export default function SalesHistoryPage() {
                                                                 <div className="text-xs text-muted-foreground">{product.brand} {product.model}</div>
                                                             </>
                                                         ) : (
-                                                            'Unknown Product'
+                                                            'منتج غير معروف'
                                                         )}
                                                     </div>
                                                     <div className="col-span-2 text-right">{formatCurrency(item.price)}</div>
@@ -387,15 +387,15 @@ export default function SalesHistoryPage() {
                                     <div className="bg-muted/10 px-4 py-2 text-right">
                                         <div className="space-y-1">
                                             <div className="flex justify-end">
-                                                <span className="w-24 text-sm text-muted-foreground">Subtotal:</span>
+                                                <span className="w-24 text-sm text-muted-foreground">المجموع الفرعي:</span>
                                                 <span className="w-24">{formatCurrency(selectedSale.total)}</span>
                                             </div>
                                             <div className="flex justify-end">
-                                                <span className="w-24 text-sm text-muted-foreground">Discount:</span>
+                                                <span className="w-24 text-sm text-muted-foreground">الخصم:</span>
                                                 <span className="w-24">{formatCurrency(selectedSale.discount)}</span>
                                             </div>
                                             <div className="flex justify-end font-medium">
-                                                <span className="w-24">Total:</span>
+                                                <span className="w-24">الإجمالي:</span>
                                                 <span className="w-24">{formatCurrency(selectedSale.finalTotal)}</span>
                                             </div>
                                         </div>
@@ -408,13 +408,13 @@ export default function SalesHistoryPage() {
                                     variant="outline"
                                     onClick={() => setSelectedSaleId(null)}
                                 >
-                                    Close
+                                    إغلاق
                                 </Button>
                                 <Button
                                     onClick={() => handlePrintInvoice(selectedSale)}
                                 >
                                     <Printer className="h-4 w-4 mr-2" />
-                                    Print Invoice
+                                    طباعة الفاتورة
                                 </Button>
                             </div>
                         </div>
@@ -424,4 +424,3 @@ export default function SalesHistoryPage() {
         </div>
     );
 };
-

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -37,40 +36,40 @@ const InvoicePreviewDialog = ({ saleId, open, onOpenChange }: InvoicePreviewDial
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Receipt className="h-5 w-5" />
-            Invoice #{sale.id}
+            فاتورة رقم {sale.id}
           </DialogTitle>
         </DialogHeader>
         
         <div className="space-y-4">
           <div className="flex justify-between text-sm">
             <div>
-              <p className="text-muted-foreground">Date:</p>
+              <p className="text-muted-foreground">التاريخ:</p>
               <p className="font-medium">{formatDate(sale.createdAt)}</p>
             </div>
             
             <div className="text-right">
-              <p className="text-muted-foreground">Payment Method:</p>
+              <p className="text-muted-foreground">طريقة الدفع:</p>
               <p className="font-medium">{sale.paymentMethod.replace('_', ' ').toUpperCase()}</p>
             </div>
           </div>
           
           {customer && (
             <div className="rounded-md border p-3 bg-muted/30">
-              <p className="text-sm font-medium mb-1">Customer</p>
+              <p className="text-sm font-medium mb-1">العميل</p>
               <p className="text-sm">{customer.name}</p>
               <p className="text-sm text-muted-foreground">{customer.phone}</p>
             </div>
           )}
           
           <div>
-            <h3 className="text-sm font-medium mb-2">Items</h3>
+            <h3 className="text-sm font-medium mb-2">العناصر</h3>
             <div className="space-y-2">
               {sale.items.map((item, index) => {
                 const product = products.find(p => p.id === item.productId);
                 return (
                   <div key={index} className="flex justify-between text-sm border-b pb-2">
                     <div>
-                      {product ? product.name : 'Unknown Product'} x{item.quantity}
+                      {product ? product.name : 'منتج غير معروف'} x{item.quantity}
                     </div>
                     <div className="text-right">
                       {formatCurrency(item.price * item.quantity)}
@@ -82,19 +81,19 @@ const InvoicePreviewDialog = ({ saleId, open, onOpenChange }: InvoicePreviewDial
           </div>
           
           <div className="flex justify-between pt-2 border-t">
-            <div className="text-sm">Subtotal</div>
+            <div className="text-sm">المجموع الفرعي</div>
             <div>{formatCurrency(sale.total)}</div>
           </div>
           
           {sale.discount > 0 && (
             <div className="flex justify-between text-sm">
-              <div>Discount</div>
+              <div>الخصم</div>
               <div>-{formatCurrency(sale.discount)}</div>
             </div>
           )}
           
           <div className="flex justify-between font-medium text-lg">
-            <div>Total</div>
+            <div>الإجمالي</div>
             <div>{formatCurrency(sale.finalTotal)}</div>
           </div>
           
@@ -109,7 +108,7 @@ const InvoicePreviewDialog = ({ saleId, open, onOpenChange }: InvoicePreviewDial
         <DialogFooter>
           <Button onClick={handlePrint} className="w-full">
             <Printer className="mr-2 h-4 w-4" />
-            Print Invoice
+            طباعة الفاتورة
           </Button>
         </DialogFooter>
       </DialogContent>

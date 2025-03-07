@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,12 +48,12 @@ const SalesForm = () => {
     const product = products.find(p => p.barcode === barcode);
     
     if (!product) {
-      toast.error("Product not found");
+      toast.error("المنتج غير موجود");
       return;
     }
     
     if (product.stock <= 0) {
-      toast.error("Product out of stock");
+      toast.error("المنتج غير متوفر في المخزون");
       return;
     }
     
@@ -67,12 +66,12 @@ const SalesForm = () => {
     const product = products.find(p => p.id === productId);
     
     if (!product) {
-      toast.error("Product not found");
+      toast.error("المنتج غير موجود");
       return;
     }
     
     if (product.stock <= 0) {
-      toast.error("Product out of stock");
+      toast.error("المنتج غير متوفر في المخزون");
       return;
     }
     
@@ -90,7 +89,7 @@ const SalesForm = () => {
       // Check if we have enough stock
       const currentQty = newItems[existingItemIndex].quantity;
       if (currentQty >= product.stock) {
-        toast.error("Not enough stock available");
+        toast.error("لا يوجد مخزون كافٍ متاح");
         return;
       }
       
@@ -112,7 +111,7 @@ const SalesForm = () => {
       ]);
     }
     
-    toast.success(`Added: ${product.name}`);
+    toast.success(`تمت إضافة: ${product.name}`);
   };
   
   // Handle quantity change
@@ -131,7 +130,7 @@ const SalesForm = () => {
     } else {
       // Check stock limits
       if (change > 0 && newQuantity > product.stock) {
-        toast.error("Not enough stock available");
+        toast.error("لا يوجد مخزون كافٍ متاح");
         return;
       }
       
@@ -154,7 +153,7 @@ const SalesForm = () => {
   // Show sale preview
   const handlePreviewSale = () => {
     if (items.length === 0) {
-      toast.error("No items in cart");
+      toast.error("لا توجد عناصر في السلة");
       return;
     }
     
@@ -164,7 +163,7 @@ const SalesForm = () => {
   // Process the sale
   const handleProcessSale = () => {
     if (items.length === 0) {
-      toast.error("No items in cart");
+      toast.error("لا توجد عناصر في السلة");
       return;
     }
     
@@ -198,7 +197,7 @@ const SalesForm = () => {
         phone: "(555) 123-4567"
       });
       
-      toast.success("Sale completed successfully");
+      toast.success("اكتمل البيع بنجاح");
       
       // Reset form
       setItems([]);
@@ -208,7 +207,7 @@ const SalesForm = () => {
       setShowPreview(false);
     } catch (error) {
       console.error("Error processing sale:", error);
-      toast.error("Error processing sale");
+      toast.error("خطأ في معالجة عملية البيع");
     } finally {
       setIsProcessing(false);
     }
@@ -223,7 +222,7 @@ const SalesForm = () => {
     <div className="grid gap-6 lg:grid-cols-3">
       <Card className="col-span-2 shadow-md">
         <CardHeader className="pb-3">
-          <CardTitle className="text-xl">New Sale</CardTitle>
+          <CardTitle className="text-xl">عملية بيع جديدة</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-4 mb-6">
@@ -231,37 +230,36 @@ const SalesForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Barcode Scanner */}
               <div className="space-y-2">
-                <Label>Add by Barcode</Label>
+                <Label>إضافة بواسطة الباركود</Label>
                 <form onSubmit={handleAddByBarcode} className="flex gap-2">
                   <div className="flex-1">
                     <Input
                       id="barcode-input"
-                      placeholder="Scan or enter barcode..."
+                      placeholder="امسح أو أدخل الباركود..."
                       value={barcode}
                       onChange={(e) => setBarcode(e.target.value)}
-                      className="rounded-r-none"
                     />
                   </div>
-                  <Button type="submit" className="rounded-l-none" variant="default">
+                  <Button type="submit" variant="default">
                     <Search className="h-4 w-4 mr-2" />
-                    Add
+                    إضافة
                   </Button>
                 </form>
               </div>
               
               {/* Product Selection Dropdown */}
               <div className="space-y-2">
-                <Label>Select from Products</Label>
+                <Label>اختر من المنتجات</Label>
                 <Select onValueChange={handleAddFromDropdown}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Choose a product" />
+                    <SelectValue placeholder="اختر منتجًا" />
                   </SelectTrigger>
                   <SelectContent>
                     {products
                       .filter(p => p.stock > 0)
                       .map(product => (
                         <SelectItem key={product.id} value={product.id}>
-                          {product.name} - {formatCurrency(product.sellingPrice)} ({product.stock} in stock)
+                          {product.name} - {formatCurrency(product.sellingPrice)} (متوفر {product.stock})
                         </SelectItem>
                       ))}
                   </SelectContent>
@@ -277,10 +275,10 @@ const SalesForm = () => {
                   onValueChange={(value) => setSelectedCustomerId(value !== "no-customer" ? value : null)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a customer (optional)" />
+                    <SelectValue placeholder="اختر عميلاً (اختياري)" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="no-customer">No customer</SelectItem>
+                    <SelectItem value="no-customer">لا يوجد عميل</SelectItem>
                     {customers.map(customer => (
                       <SelectItem key={customer.id} value={customer.id}>
                         {customer.name} - {customer.phone}
@@ -293,7 +291,7 @@ const SalesForm = () => {
                 <PopoverTrigger asChild>
                   <Button variant="outline" className="flex gap-2 items-center">
                     <User className="h-4 w-4" />
-                    <span>Customer Info</span>
+                    <span>معلومات العميل</span>
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">
@@ -301,17 +299,17 @@ const SalesForm = () => {
                     <div className="space-y-2">
                       <h3 className="font-medium text-lg">{selectedCustomer.name}</h3>
                       <div className="grid grid-cols-[1fr_2fr] gap-1 text-sm">
-                        <span className="text-muted-foreground">Phone:</span>
+                        <span className="text-muted-foreground">الهاتف:</span>
                         <span>{selectedCustomer.phone}</span>
-                        <span className="text-muted-foreground">Address:</span>
+                        <span className="text-muted-foreground">العنوان:</span>
                         <span>{selectedCustomer.address}</span>
-                        <span className="text-muted-foreground">Purchases:</span>
+                        <span className="text-muted-foreground">المشتريات:</span>
                         <span>{selectedCustomer.purchases.length}</span>
                       </div>
                     </div>
                   ) : (
                     <p className="text-muted-foreground text-center py-2">
-                      No customer selected
+                      لم يتم اختيار عميل
                     </p>
                   )}
                 </PopoverContent>
@@ -323,8 +321,8 @@ const SalesForm = () => {
             {items.length === 0 ? (
               <div className="py-8 text-center text-muted-foreground">
                 <ShoppingCart className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                <p>No items added yet</p>
-                <p className="text-sm">Scan a barcode or select a product to add</p>
+                <p>لم تتم إضافة أي عناصر حتى الآن</p>
+                <p className="text-sm">امسح الباركود أو حدد منتجًا للإضافة</p>
               </div>
             ) : (
               <div className="divide-y">
@@ -337,7 +335,7 @@ const SalesForm = () => {
                       <div className="flex-1">
                         <h4 className="font-medium">{product.name}</h4>
                         <p className="text-sm text-muted-foreground">
-                          {formatCurrency(item.price)} each
+                          {formatCurrency(item.price)} لكل
                         </p>
                       </div>
                       
@@ -389,16 +387,16 @@ const SalesForm = () => {
       
       <Card className="shadow-md h-fit">
         <CardHeader className="pb-3">
-          <CardTitle className="text-xl">Order Summary</CardTitle>
+          <CardTitle className="text-xl">ملخص الطلب</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex justify-between">
-            <span className="text-muted-foreground">Subtotal</span>
+            <span className="text-muted-foreground">المجموع الفرعي</span>
             <span className="font-medium">{formatCurrency(subtotal)}</span>
           </div>
           
           <div className="flex flex-col gap-2">
-            <Label htmlFor="discount">Discount</Label>
+            <Label htmlFor="discount">الخصم</Label>
             <Input
               id="discount"
               type="number"
@@ -410,32 +408,32 @@ const SalesForm = () => {
           </div>
           
           <div className="flex flex-col gap-2">
-            <Label htmlFor="payment-method">Payment Method</Label>
+            <Label htmlFor="payment-method">طريقة الدفع</Label>
             <Select 
               value={paymentMethod} 
               onValueChange={setPaymentMethod}
             >
               <SelectTrigger id="payment-method" className="w-full">
-                <SelectValue placeholder="Select payment method" />
+                <SelectValue placeholder="حدد طريقة الدفع" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="cash">Cash</SelectItem>
-                <SelectItem value="credit_card">Credit Card</SelectItem>
-                <SelectItem value="debit_card">Debit Card</SelectItem>
-                <SelectItem value="mobile_payment">Mobile Payment</SelectItem>
+                <SelectItem value="cash">نقدي</SelectItem>
+                <SelectItem value="credit_card">بطاقة ائتمان</SelectItem>
+                <SelectItem value="debit_card">بطاقة خصم</SelectItem>
+                <SelectItem value="mobile_payment">الدفع عبر الهاتف المحمول</SelectItem>
               </SelectContent>
             </Select>
           </div>
           
           {selectedCustomer && (
             <div className="border-t pt-2">
-              <p className="text-sm font-medium">Customer: {selectedCustomer.name}</p>
+              <p className="text-sm font-medium">العميل: {selectedCustomer.name}</p>
               <p className="text-xs text-muted-foreground">{selectedCustomer.phone}</p>
             </div>
           )}
           
           <div className="border-t pt-4 flex justify-between items-center font-semibold text-lg">
-            <span>Total</span>
+            <span>الإجمالي</span>
             <span>{formatCurrency(total)}</span>
           </div>
         </CardContent>
@@ -447,7 +445,7 @@ const SalesForm = () => {
             onClick={handlePreviewSale}
           >
             <Receipt className="h-4 w-4 mr-2" />
-            Preview Sale
+            معاينة البيع
           </Button>
         </CardFooter>
       </Card>
@@ -456,13 +454,13 @@ const SalesForm = () => {
       <Dialog open={showPreview} onOpenChange={setShowPreview}>
         <DialogContent className="max-w-3xl">
           <DialogHeader>
-            <DialogTitle>Sale Preview</DialogTitle>
+            <DialogTitle>معاينة البيع</DialogTitle>
           </DialogHeader>
           
           <div className="space-y-4">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-sm text-muted-foreground">Date:</p>
+                <p className="text-sm text-muted-foreground">التاريخ:</p>
                 <p>{formatDate(new Date())}</p>
               </div>
               {/* Temporary barcode for preview */}
@@ -473,7 +471,7 @@ const SalesForm = () => {
             
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <h3 className="font-medium mb-1">Customer Details</h3>
+                <h3 className="font-medium mb-1">تفاصيل العميل</h3>
                 {selectedCustomerId ? (
                   (() => {
                     const customer = customers.find(c => c.id === selectedCustomerId);
@@ -484,31 +482,31 @@ const SalesForm = () => {
                         <p className="text-sm text-muted-foreground">{customer.address}</p>
                       </div>
                     ) : (
-                      <p className="text-sm text-muted-foreground">Customer data not found</p>
+                      <p className="text-sm text-muted-foreground">بيانات العميل غير موجودة</p>
                     );
                   })()
                 ) : (
-                  <p className="text-sm text-muted-foreground">Walk-in Customer</p>
+                  <p className="text-sm text-muted-foreground">عميل عادي</p>
                 )}
               </div>
               
               <div>
-                <h3 className="font-medium mb-1">Payment Information</h3>
+                <h3 className="font-medium mb-1">معلومات الدفع</h3>
                 <div className="space-y-1">
                   <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Payment Method:</span>
+                    <span className="text-sm text-muted-foreground">طريقة الدفع:</span>
                     <span className="capitalize">{paymentMethod.replace('_', ' ')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Subtotal:</span>
+                    <span className="text-sm text-muted-foreground">المجموع الفرعي:</span>
                     <span>{formatCurrency(subtotal)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Discount:</span>
+                    <span className="text-sm text-muted-foreground">الخصم:</span>
                     <span>{formatCurrency(discount)}</span>
                   </div>
                   <div className="flex justify-between font-medium">
-                    <span>Total:</span>
+                    <span>الإجمالي:</span>
                     <span>{formatCurrency(total)}</span>
                   </div>
                 </div>
@@ -516,13 +514,13 @@ const SalesForm = () => {
             </div>
             
             <div>
-              <h3 className="font-medium mb-2">Items</h3>
+              <h3 className="font-medium mb-2">العناصر</h3>
               <div className="border rounded-md overflow-hidden">
                 <div className="grid grid-cols-12 bg-muted/30 text-sm font-medium py-2 px-4">
-                  <div className="col-span-6">Product</div>
-                  <div className="col-span-2 text-right">Price</div>
-                  <div className="col-span-2 text-right">Qty</div>
-                  <div className="col-span-2 text-right">Subtotal</div>
+                  <div className="col-span-6">المنتج</div>
+                  <div className="col-span-2 text-right">السعر</div>
+                  <div className="col-span-2 text-right">الكمية</div>
+                  <div className="col-span-2 text-right">المجموع الفرعي</div>
                 </div>
                 
                 <div className="divide-y">
@@ -537,7 +535,7 @@ const SalesForm = () => {
                               <div className="text-xs text-muted-foreground">{product.brand} {product.model}</div>
                             </>
                           ) : (
-                            'Unknown Product'
+                            'منتج غير معروف'
                           )}
                         </div>
                         <div className="col-span-2 text-right">{formatCurrency(item.price)}</div>
@@ -553,15 +551,15 @@ const SalesForm = () => {
                 <div className="bg-muted/10 px-4 py-2 text-right">
                   <div className="space-y-1">
                     <div className="flex justify-end">
-                      <span className="w-24 text-sm text-muted-foreground">Subtotal:</span>
+                      <span className="w-24 text-sm text-muted-foreground">المجموع الفرعي:</span>
                       <span className="w-24">{formatCurrency(subtotal)}</span>
                     </div>
                     <div className="flex justify-end">
-                      <span className="w-24 text-sm text-muted-foreground">Discount:</span>
+                      <span className="w-24 text-sm text-muted-foreground">الخصم:</span>
                       <span className="w-24">{formatCurrency(discount)}</span>
                     </div>
                     <div className="flex justify-end font-medium">
-                      <span className="w-24">Total:</span>
+                      <span className="w-24">الإجمالي:</span>
                       <span className="w-24">{formatCurrency(total)}</span>
                     </div>
                   </div>
@@ -575,7 +573,7 @@ const SalesForm = () => {
                 onClick={() => setShowPreview(false)}
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Sale
+                الرجوع إلى البيع
               </Button>
               <div className="space-x-2">
                 <Button
@@ -587,7 +585,7 @@ const SalesForm = () => {
                   disabled={isProcessing}
                 >
                   <Receipt className="h-4 w-4 mr-2" />
-                  Complete Sale
+                  إتمام عملية البيع
                 </Button>
                 <Button
                   onClick={() => {
@@ -599,7 +597,7 @@ const SalesForm = () => {
                   disabled={isProcessing}
                 >
                   <Receipt className="h-4 w-4 mr-2" />
-                  Complete & Print
+                  إتمام عملية البيع والطباعة
                 </Button>
               </div>
             </DialogFooter>

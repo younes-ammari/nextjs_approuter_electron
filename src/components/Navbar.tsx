@@ -14,11 +14,11 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const links = [
-    { to: "/", label: "Dashboard", icon: Home },
-    { to: "/inventory", label: "Inventory", icon: Package },
-    { to: "/sales", label: "Sales", icon: ShoppingCart },
-    { to: "/customers", label: "Customers", icon: User },
-    { to: "/reports", label: "Reports", icon: BarChart2 },
+    { to: "/", label: "لوحة التحكم", icon: Home },
+    { to: "/inventory", label: "المخزون", icon: Package },
+    { to: "/sales", label: "المبيعات", icon: ShoppingCart },
+    { to: "/customers", label: "العملاء", icon: User },
+    { to: "/reports", label: "التقارير", icon: BarChart2 },
   ];
 
   return (
@@ -46,13 +46,13 @@ const Navbar = () => {
                 key={link.to}
                 href={link.to}
                 className={cn(
-                  "group inline-flex h-9 items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+                  "group inline-flex gap-1 h-9 items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
                   isActive
                     ? "bg-accent text-accent-foreground"
                     : "bg-transparent transparent-foreground"
                 )}
               >
-                <link.icon className="mr-2 h-4 w-4" />
+                <link.icon className="ms-2 h-4 w-4" />
                 {link.label}
               </Link>
             );

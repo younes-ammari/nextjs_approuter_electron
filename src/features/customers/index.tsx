@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useInventory } from "@/context/InventoryContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -52,7 +51,7 @@ export default function CustomersPage() {
             address: newCustomer.address
         });
 
-        toast.success("Customer added successfully");
+        toast.success("تمت إضافة العميل بنجاح");
 
         // Reset form
         setNewCustomer({
@@ -86,7 +85,7 @@ export default function CustomersPage() {
             address: editingCustomer.address
         });
 
-        toast.success("Customer updated successfully");
+        toast.success("تم تحديث معلومات العميل بنجاح");
         setIsEditCustomerOpen(false);
     };
 
@@ -102,7 +101,7 @@ export default function CustomersPage() {
 
         deleteCustomer(selectedCustomerId, deleteSalesWithCustomer);
 
-        toast.success("Customer deleted successfully");
+        toast.success("تم حذف العميل بنجاح");
         setIsDeleteDialogOpen(false);
     };
 
@@ -127,14 +126,14 @@ export default function CustomersPage() {
         <div className="space-y-6 animate-fade-in">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight">Customers</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">العملاء</h2>
                     <p className="text-muted-foreground mt-1">
-                        Manage your customer database and view purchase history
+                        إدارة قاعدة بيانات العملاء وعرض سجل الشراء
                     </p>
                 </div>
                 <Button onClick={() => setIsAddCustomerOpen(true)}>
                     <Plus className="h-4 w-4 mr-2" />
-                    Add Customer
+                    إضافة عميل
                 </Button>
             </div>
 
@@ -142,7 +141,7 @@ export default function CustomersPage() {
                 <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
-                        placeholder="Search customers by name or phone..."
+                        placeholder="ابحث عن العملاء بالاسم أو رقم الهاتف..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="pl-10"
@@ -154,9 +153,9 @@ export default function CustomersPage() {
                 {filteredCustomers.length === 0 ? (
                     <div className="col-span-full text-center py-8">
                         <User className="h-12 w-12 mx-auto text-muted-foreground opacity-20" />
-                        <h3 className="mt-4 font-medium text-muted-foreground">No customers found</h3>
+                        <h3 className="mt-4 font-medium text-muted-foreground">لم يتم العثور على عملاء</h3>
                         <p className="text-sm text-muted-foreground">
-                            Try a different search or add a new customer.
+                            حاول البحث بكلمات مختلفة أو إضافة عميل جديد.
                         </p>
                     </div>
                 ) : (
@@ -195,23 +194,23 @@ export default function CustomersPage() {
                                 <CardContent className="space-y-3">
                                     <div className="flex items-start gap-2 text-sm">
                                         <MapPin className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
-                                        <span>{customer.address || "No address provided"}</span>
+                                        <span>{customer.address || "لم يتم تقديم عنوان"}</span>
                                     </div>
 
                                     <div className="border-t pt-3">
                                         <div className="flex justify-between text-sm mb-1">
-                                            <span className="text-muted-foreground">Total Purchases:</span>
+                                            <span className="text-muted-foreground">إجمالي المشتريات:</span>
                                             <span className="font-medium">{customerPurchases.length}</span>
                                         </div>
                                         <div className="flex justify-between text-sm">
-                                            <span className="text-muted-foreground">Total Spent:</span>
+                                            <span className="text-muted-foreground">إجمالي المبلغ المصروف:</span>
                                             <span className="font-medium">{formatCurrency(totalSpent)}</span>
                                         </div>
                                     </div>
 
                                     {customerPurchases.length > 0 && (
                                         <div className="border-t pt-3">
-                                            <h4 className="text-sm font-medium mb-2">Recent Purchases</h4>
+                                            <h4 className="text-sm font-medium mb-2">المشتريات الأخيرة</h4>
                                             <div className="space-y-2 max-h-40 overflow-y-auto">
                                                 {customerPurchases
                                                     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -232,7 +231,7 @@ export default function CustomersPage() {
                                                             </div>
                                                             <div className="text-muted-foreground flex items-center">
                                                                 <Receipt className="h-3 w-3 mr-1" />
-                                                                {sale.items.length} {sale.items.length === 1 ? 'item' : 'items'}
+                                                                {sale.items.length} {sale.items.length === 1 ? 'عنصر' : 'عناصر'}
                                                             </div>
                                                         </div>
                                                     ))}
@@ -248,40 +247,40 @@ export default function CustomersPage() {
 
             {/* Add Customer Sheet */}
             <Sheet open={isAddCustomerOpen} onOpenChange={setIsAddCustomerOpen}>
-                <SheetContent>
+                <SheetContent >
                     <SheetHeader>
-                        <SheetTitle>Add New Customer</SheetTitle>
+                        <SheetTitle>إضافة عميل جديد</SheetTitle>
                         <SheetDescription>
-                            Add a new customer to your database. Fill in the details below.
+                            أضف عميلاً جديدًا إلى قاعدة البيانات الخاصة بك. املأ التفاصيل أدناه.
                         </SheetDescription>
                     </SheetHeader>
 
                     <div className="space-y-4 py-4">
                         <div className="space-y-2">
-                            <Label htmlFor="name">Full Name</Label>
+                            <Label htmlFor="name">الاسم الكامل</Label>
                             <Input
                                 id="name"
-                                placeholder="John Doe"
+                                placeholder="اسم العميل"
                                 value={newCustomer.name}
                                 onChange={(e) => setNewCustomer({ ...newCustomer, name: e.target.value })}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="phone">Phone Number</Label>
+                            <Label htmlFor="phone">رقم الهاتف</Label>
                             <Input
                                 id="phone"
-                                placeholder="(555) 123-4567"
+                                placeholder="رقم الهاتف"
                                 value={newCustomer.phone}
                                 onChange={(e) => setNewCustomer({ ...newCustomer, phone: e.target.value })}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="address">Address</Label>
+                            <Label htmlFor="address">العنوان</Label>
                             <Input
                                 id="address"
-                                placeholder="123 Main St, City, Country"
+                                placeholder="العنوان"
                                 value={newCustomer.address}
                                 onChange={(e) => setNewCustomer({ ...newCustomer, address: e.target.value })}
                             />
@@ -290,7 +289,7 @@ export default function CustomersPage() {
 
                     <SheetFooter>
                         <Button onClick={handleAddCustomer} disabled={!newCustomer.name || !newCustomer.phone}>
-                            Add Customer
+                            إضافة عميل
                         </Button>
                     </SheetFooter>
                 </SheetContent>
@@ -298,40 +297,40 @@ export default function CustomersPage() {
 
             {/* Edit Customer Sheet */}
             <Sheet open={isEditCustomerOpen} onOpenChange={setIsEditCustomerOpen}>
-                <SheetContent>
+                <SheetContent >
                     <SheetHeader>
-                        <SheetTitle>Edit Customer</SheetTitle>
+                        <SheetTitle>تعديل معلومات العميل</SheetTitle>
                         <SheetDescription>
-                            Update customer information.
+                            تحديث معلومات العميل.
                         </SheetDescription>
                     </SheetHeader>
 
                     <div className="space-y-4 py-4">
                         <div className="space-y-2">
-                            <Label htmlFor="edit-name">Full Name</Label>
+                            <Label htmlFor="edit-name">الاسم الكامل</Label>
                             <Input
                                 id="edit-name"
-                                placeholder="John Doe"
+                                placeholder="اسم العميل"
                                 value={editingCustomer.name}
                                 onChange={(e) => setEditingCustomer({ ...editingCustomer, name: e.target.value })}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="edit-phone">Phone Number</Label>
+                            <Label htmlFor="edit-phone">رقم الهاتف</Label>
                             <Input
                                 id="edit-phone"
-                                placeholder="(555) 123-4567"
+                                placeholder="رقم الهاتف"
                                 value={editingCustomer.phone}
                                 onChange={(e) => setEditingCustomer({ ...editingCustomer, phone: e.target.value })}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="edit-address">Address</Label>
+                            <Label htmlFor="edit-address">العنوان</Label>
                             <Input
                                 id="edit-address"
-                                placeholder="123 Main St, City, Country"
+                                placeholder="العنوان"
                                 value={editingCustomer.address}
                                 onChange={(e) => setEditingCustomer({ ...editingCustomer, address: e.target.value })}
                             />
@@ -343,7 +342,7 @@ export default function CustomersPage() {
                             onClick={handleUpdateCustomer}
                             disabled={!editingCustomer.name || !editingCustomer.phone}
                         >
-                            Update Customer
+                            تحديث معلومات العميل
                         </Button>
                     </SheetFooter>
                 </SheetContent>
@@ -353,9 +352,9 @@ export default function CustomersPage() {
             <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure you want to delete this customer?</AlertDialogTitle>
+                        <AlertDialogTitle>هل أنت متأكد من أنك تريد حذف هذا العميل؟</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone.
+                            لا يمكن التراجع عن هذا الإجراء.
                             {customers.find(c => selectedCustomerId !== null && c.id === selectedCustomerId)?.purchases?.length! > 0 && (
                                 <div className="mt-2 p-2 bg-muted rounded-md">
                                     <label className="flex items-center space-x-2">
@@ -366,8 +365,8 @@ export default function CustomersPage() {
                                             className="rounded"
                                         />
                                         <span>
-                                            Also delete all sales associated with this customer?
-                                            ({customers.find(c => c.id === selectedCustomerId)?.purchases.length ?? 0} sales)
+                                            هل تريد أيضًا حذف جميع المبيعات المرتبطة بهذا العميل؟
+                                            ({customers.find(c => c.id === selectedCustomerId)?.purchases.length ?? 0} مبيعات)
                                         </span>
                                     </label>
                                 </div>
@@ -375,12 +374,12 @@ export default function CustomersPage() {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>إلغاء</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={handleDeleteCustomer}
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                         >
-                            Delete
+                            حذف
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

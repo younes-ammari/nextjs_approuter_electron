@@ -186,7 +186,7 @@ const initialCustomers: Customer[] = [
 
 const initialSales: Sale[] = [
   {
-    id: '1',
+    id: '31680654860648656',
     items: [
       { productId: '1', quantity: 1, price: 899 },
       { productId: '4', quantity: 1, price: 249 },
@@ -199,7 +199,7 @@ const initialSales: Sale[] = [
     createdAt: new Date(Date.now() - 86400000), // Yesterday
   },
   {
-    id: '2',
+    id: '06548606840564848',
     items: [
       { productId: '2', quantity: 1, price: 849 },
     ],

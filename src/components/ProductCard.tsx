@@ -31,30 +31,30 @@ const ProductCard = ({ product, onEdit, onDelete }: ProductCardProps) => {
                   ? 'bg-yellow-100 text-yellow-800' 
                   : 'bg-red-100 text-red-800'
             }`}>
-              {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+              {product.stock > 0 ? `متوفر ${product.stock} في المخزون` : 'نفاد المخزون'}
             </span>
           </div>
           
           <div className="mt-2 space-y-1">
             <p className="text-sm text-muted-foreground">
-              <span className="font-medium">Brand:</span> {product.brand}
+              <span className="font-medium">العلامة التجارية:</span> {product.brand}
             </p>
             <p className="text-sm text-muted-foreground">
-              <span className="font-medium">Model:</span> {product.model}
+              <span className="font-medium">الموديل:</span> {product.model}
             </p>
             {product.storage && (
               <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Storage:</span> {product.storage}
+                <span className="font-medium">التخزين:</span> {product.storage}
               </p>
             )}
             {product.color && (
               <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Color:</span> {product.color}
+                <span className="font-medium">اللون:</span> {product.color}
               </p>
             )}
             <div className="flex justify-between mt-2">
               <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Cost:</span> {formatCurrency(product.purchasePrice)}
+                <span className="font-medium">التكلفة:</span> {formatCurrency(product.purchasePrice)}
               </p>
               <p className="text-sm font-semibold text-primary">
                 {formatCurrency(product.sellingPrice)}
@@ -71,7 +71,7 @@ const ProductCard = ({ product, onEdit, onDelete }: ProductCardProps) => {
           onClick={handlePrintBarcode}
         >
           <Tag className="h-3.5 w-3.5 mr-1" />
-          Barcode
+          الباركود
         </Button>
         <div className="flex gap-2">
           <Button 
@@ -81,7 +81,7 @@ const ProductCard = ({ product, onEdit, onDelete }: ProductCardProps) => {
             onClick={() => onEdit(product)}
           >
             <Pencil className="h-3.5 w-3.5 mr-1" />
-            Edit
+            تعديل
           </Button>
           <Button 
             variant="ghost" 
@@ -90,7 +90,7 @@ const ProductCard = ({ product, onEdit, onDelete }: ProductCardProps) => {
             onClick={() => onDelete(product.id)}
           >
             <Trash2 className="h-3.5 w-3.5 mr-1" />
-            Delete
+            حذف
           </Button>
         </div>
       </CardFooter>
